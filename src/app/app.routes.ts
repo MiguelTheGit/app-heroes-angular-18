@@ -6,17 +6,20 @@ export const routes: Routes = [
         redirectTo: 'heroes/list', 
         pathMatch: 'full' 
     },
-
     {
         path: 'heroes/list',
         loadComponent: () => 
             import('./core/components/heroes-list/heroes-list.component').then(m => m.HeroesListComponent)
+    },
+    {
+        path: 'heroes/detail/:id',
+        loadComponent: () =>
+            import('./core/components/hero-details/hero-details.component').then(m => m.HeroDetailsComponent)
     },
 
     {
         path: '**',
         redirectTo: 'heroes/list',
         pathMatch: 'full'
-    },
-
+    }
 ];

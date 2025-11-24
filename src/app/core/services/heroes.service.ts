@@ -36,4 +36,14 @@ export class HeroesService {
     return this.http.get<Hero[]>(`${this._baseUrl}/${this._resource}`);
   }
 
+
+  /**
+   * Retrieves a single hero by its ID.
+   * @param {string} id - The unique identifier of the hero.
+   * @returns {Observable<Hero>} An observable with the hero data.
+   */
+  public getHeroById(id: string): Observable<Hero> {
+    return this.http.get<Hero>(`${this._baseUrl}/${this._resource}/${id}`);
+  }
+
 }

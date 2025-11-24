@@ -1,9 +1,14 @@
-<h2>Lista de Héroes</h2>
+
+<h2>List of Heroes</h2>
 
 <div>
   @for (hero of heroes(); track hero.id) {
     <p>
-      <strong>{{ hero.superhero }}</strong> - {{ hero.publisher }}
+      <a [routerLink]="['/heroes/detail/', hero.id]">
+        <strong>{{ hero.superhero }}</strong>
+      </a>
+      - {{ hero.publisher }}
     </p>
   }
 </div>
+
