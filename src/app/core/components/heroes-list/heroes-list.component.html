@@ -1,0 +1,9 @@
+<h2>Lista de Héroes</h2>
+
+<div>
+  @for (hero of heroes; track hero.id) {
+    <p>
+      <strong>{{ hero.superhero }}</strong> - {{ hero.publisher }}
+    </p>
+  }
+</div>
