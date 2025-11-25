@@ -1,11 +1,12 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { Hero } from '../../interfaces/hero.interface';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Hero } from '../../models/interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
   selector: 'app-heroes-list',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './heroes-list.component.html',
   styleUrl: './heroes-list.component.scss'
 })
@@ -16,8 +17,11 @@ export class HeroesListComponent implements OnInit {
    */
   public heroes = signal<Hero[]>([]);
 
+  /**
+   * Access to the HeroesService
+   */
+  private _heroesService = inject(HeroesService);
 
-  constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
     this._loadHeroes();
@@ -27,7 +31,10 @@ export class HeroesListComponent implements OnInit {
    * Loads heroes from the service 
    */
   private _loadHeroes(): void {
-    this.heroesService.getHeroes().subscribe(data => this.heroes.set(data));
+    this._heroesService.getHeroes().subscribe({
+      next: (data) => this.heroes.set(data)
+    });
+
   }
 
 }

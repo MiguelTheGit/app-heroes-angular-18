@@ -1,0 +1,15 @@
+
+<h2>Lista de Héroes</h2>
+
+<div>
+  @for (hero of heroes(); track hero.id) {
+    <p>
+      <a [routerLink]="['/heroes/detail', hero.id]">
+        <strong>{{ hero.superhero }}</strong>
+      </a>
+      - {{ hero.publisher }}
+    </p>
+  } @empty {
+    <p>There are no heroes to show</p>
+  }
+</div>
