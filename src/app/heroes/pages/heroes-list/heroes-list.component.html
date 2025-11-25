@@ -1,6 +1,8 @@
 
 <h2>Lista de Héroes</h2>
 
+<button routerLink="/heroes/new"> + Add New Hero </button>
+
 <div>
   @for (hero of heroes(); track hero.id) {
     <p>
@@ -12,4 +14,5 @@
   } @empty {
     <p>There are no heroes to show</p>
   }
+
 </div>

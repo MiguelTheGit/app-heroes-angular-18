@@ -16,7 +16,11 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./heroes/pages/hero-details/hero-details.component').then(c => c.HeroDetailsComponent)
     },
-
+    {
+        path: 'heroes/new',
+        loadComponent: () =>
+            import('./heroes/pages/hero-form/hero-form.component').then(c => c.HeroFormComponent)
+    },
     {
         path: '**',
         redirectTo: 'heroes/list',

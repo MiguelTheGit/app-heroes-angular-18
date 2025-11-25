@@ -27,8 +27,11 @@ export class HeroDetailsComponent implements OnInit {
   }
 
 
-  /** 
+  /**
    * Loads a hero based on id input
+   * 
+   * @private
+   * @memberof HeroDetailsComponent
    */
   private _loadHero(): void {
     const heroId = this.id();
