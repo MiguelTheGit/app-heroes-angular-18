@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CORE_CONFIG } from '../config/core.config';
 import { Hero } from '../interfaces/hero.interface';
@@ -23,9 +23,12 @@ export class HeroesService {
    */
   private readonly _resource = 'heroes';
 
-
-  constructor(private http: HttpClient) { }
-
+  /**
+   * HttpClient instance
+   * @private
+   * @memberof HeroesService
+   */
+  private _http = inject(HttpClient);
 
 
   /**
@@ -33,7 +36,7 @@ export class HeroesService {
    * @returns {Observable<Hero[]>} An observable with the list of heroes.
    */
   public getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(`${this._baseUrl}/${this._resource}`);
+    return this._http.get<Hero[]>(`${this._baseUrl}/${this._resource}`);
   }
 
 
@@ -43,7 +46,7 @@ export class HeroesService {
    * @returns {Observable<Hero>} An observable with the hero data.
    */
   public getHeroById(id: string): Observable<Hero> {
-    return this.http.get<Hero>(`${this._baseUrl}/${this._resource}/${id}`);
+    return this._http.get<Hero>(`${this._baseUrl}/${this._resource}/${id}`);
   }
 
 }

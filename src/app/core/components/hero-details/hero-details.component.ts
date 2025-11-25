@@ -12,16 +12,15 @@ import { HeroesService } from '../../services/heroes.service';
 export class HeroDetailsComponent implements OnInit {
 
   /** Route param bound as input */
-  id = input<string>();
+  public id = input<string>();
+
+  /** Signal holding the selected hero */
+  public hero = signal<Hero | null>(null);
 
 
   /** Access to heroes service */
   private _heroesService = inject(HeroesService);
   
-  
-  /** Signal holding the selected hero */
-  public hero = signal<Hero | null>(null);
-
 
   ngOnInit(): void {
     this._loadHero();
@@ -34,7 +33,9 @@ export class HeroDetailsComponent implements OnInit {
   private _loadHero(): void {
     const heroId = this.id();
     if (heroId) {
-      this._heroesService.getHeroById(heroId).subscribe(data => this.hero.set(data));
+      this._heroesService.getHeroById(heroId).subscribe({
+        next: (data) => this.hero.set(data)
+      });
     }
   }
 

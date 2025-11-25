@@ -9,12 +9,12 @@ export const routes: Routes = [
     {
         path: 'heroes/list',
         loadComponent: () => 
-            import('./core/components/heroes-list/heroes-list.component').then(m => m.HeroesListComponent)
+            import('./core/components/heroes-list/heroes-list.component').then(c => c.HeroesListComponent)
     },
     {
         path: 'heroes/detail/:id',
         loadComponent: () =>
-            import('./core/components/hero-details/hero-details.component').then(m => m.HeroDetailsComponent)
+            import('./core/components/hero-details/hero-details.component').then(c => c.HeroDetailsComponent)
     },
 
     {

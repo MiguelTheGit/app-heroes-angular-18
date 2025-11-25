@@ -31,7 +31,12 @@ export class HeroesListComponent implements OnInit {
    * Loads heroes from the service 
    */
   private _loadHeroes(): void {
-    this._heroesService.getHeroes().subscribe(data => this.heroes.set(data));
+    // this._heroesService.getHeroes().subscribe(data => this.heroes.set(data));
+
+    this._heroesService.getHeroes().subscribe({
+      next: (data) => this.heroes.set(data)
+    });
+
   }
 
 }
