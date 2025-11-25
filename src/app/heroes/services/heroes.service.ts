@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CORE_CONFIG } from '../config/core.config';
-import { Hero } from '../interfaces/hero.interface';
+import { CORE_CONFIG } from '../../core/config/core.config';
+import { Hero } from '../models/interfaces/hero.interface';
 
 @Injectable({
   providedIn: 'root'

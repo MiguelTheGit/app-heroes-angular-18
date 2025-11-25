@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Hero } from '../../interfaces/hero.interface';
+import { Hero } from '../../models/interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
@@ -31,8 +31,6 @@ export class HeroesListComponent implements OnInit {
    * Loads heroes from the service 
    */
   private _loadHeroes(): void {
-    // this._heroesService.getHeroes().subscribe(data => this.heroes.set(data));
-
     this._heroesService.getHeroes().subscribe({
       next: (data) => this.heroes.set(data)
     });
