@@ -39,7 +39,6 @@ export class HeroesService {
     return this._http.get<Hero[]>(`${this._baseUrl}/${this._resource}`);
   }
 
-
   /**
    * Retrieves a single hero by its ID.
    * @param {string} id - The unique identifier of the hero.
@@ -48,5 +47,15 @@ export class HeroesService {
   public getHeroById(id: string): Observable<Hero> {
     return this._http.get<Hero>(`${this._baseUrl}/${this._resource}/${id}`);
   }
+
+  /**
+   * Creates a new hero.
+   * @param {Hero} hero - The hero payload to create.
+   * @returns {Observable<Hero>} An observable with the created hero.
+   */
+  public createHero(hero: Hero): Observable<Hero> {
+    return this._http.post<Hero>(`${this._baseUrl}/${this._resource}`, hero);
+  }
+
 
 }

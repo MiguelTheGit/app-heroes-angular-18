@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { Hero } from '../../models/interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
@@ -10,31 +11,16 @@ import { HeroesService } from '../../services/heroes.service';
   templateUrl: './heroes-list.component.html',
   styleUrl: './heroes-list.component.scss'
 })
-export class HeroesListComponent implements OnInit {
-
-  /**
-   * List of heroes to be displayed.
-   */
-  public heroes = signal<Hero[]>([]);
-
+export class HeroesListComponent {
+  
   /**
    * Access to the HeroesService
    */
   private _heroesService = inject(HeroesService);
 
-
-  ngOnInit(): void {
-    this._loadHeroes();
-  }
-
-  /** 
-   * Loads heroes from the service 
+  /**
+   * Signal with the list of heroes
    */
-  private _loadHeroes(): void {
-    this._heroesService.getHeroes().subscribe({
-      next: (data) => this.heroes.set(data)
-    });
-
-  }
+  public heroes = toSignal(this._heroesService.getHeroes(), { initialValue: [] as Hero[] });
 
 }
