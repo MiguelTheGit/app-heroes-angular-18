@@ -3,11 +3,6 @@
 <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
 
     <div>
-        <label>ID (unique string, e.g. "batman"):</label>
-        <input type="text" formControlName="id" />
-    </div>
-
-    <div>
         <label>Superhero:</label>
         <input type="text" formControlName="superhero" />
     </div>
@@ -38,5 +33,5 @@
     </div>
 
     <button type="submit" [disabled]="heroForm.invalid">Save</button>
-    
+
 </form>

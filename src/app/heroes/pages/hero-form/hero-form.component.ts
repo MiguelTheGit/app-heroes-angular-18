@@ -28,8 +28,6 @@ export class HeroFormComponent {
    */
   public heroForm = this._fb.group({
     
-    id: ['', [Validators.required, Validators.pattern(/^[a-z0-9-]+$/i)]],
-    
     superhero: ['', [Validators.required, Validators.minLength(1)]],
     
     publisher: ['', Validators.required],
@@ -44,7 +42,6 @@ export class HeroFormComponent {
 
   });
 
-
   
   /**
    * Save hero and redirect.
@@ -58,7 +55,7 @@ export class HeroFormComponent {
     const formValue = this.heroForm.value;
 
     const newHero: Hero = {
-      id: formValue.id!,
+      id: crypto.randomUUID(),
       superhero: formValue.superhero!,
       publisher: formValue.publisher!,
       alter_ego: formValue.alter_ego ?? '',
