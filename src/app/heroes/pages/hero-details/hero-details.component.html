@@ -1,17 +1,17 @@
 <h1 class="hero-details__title">Hero Detail: {{ id() }}</h1>
 
-@defer (when hero()) {
-  @if (hero(); as hero) {
+@defer (when $hero()) {
+  @if ($hero(); as hero) {
     <div class="hero-details__content">
       <h3 class="hero-details__name">{{ hero.superhero }}</h3>
       <p><strong>Publisher:</strong> {{ hero.publisher }}</p>
       <p><strong>Alter Ego:</strong> {{ hero.alter_ego }}</p>
       <p><strong>First Appearance:</strong> {{ hero.first_appearance }}</p>
-      @if (hero.img) {
-        <img [src]="'assets/heroes/' + hero.img + '.jpg'" alt="{{ hero.superhero }}" class="hero-details__img" />
+      @if (hero.img) { 
+        <img [src]="hero.img | imageSrc" alt="{{ hero.superhero }}" class="hero-details__img" />
       }
       @if (hero.alt_img) {
-        <img [src]="'assets/heroes/' + hero.alt_img + '.jpg'" alt="{{ hero.superhero }}" class="hero-details__img" />
+        <img [src]="hero.alt_img | imageSrc" alt="{{ hero.superhero }}" class="hero-details__img" />
       }
     </div>
   } @else {

@@ -1,14 +1,13 @@
 import { Component, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Hero } from '../../models/interfaces/hero.interface';
+import { filter, switchMap } from 'rxjs/operators';
+import { ImageSrcPipe } from '../../pipes/image-src.pipe';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
   selector: 'app-hero-details',
   standalone: true,
-  imports: [],
+  imports: [ImageSrcPipe],
   templateUrl: './hero-details.component.html',
   styleUrl: './hero-details.component.scss'
 })
@@ -25,11 +24,11 @@ export class HeroDetailsComponent{
    * Signal holding the selected hero, derived from id()
    * Uses switchMap to react to id changes
    */
-  public hero = toSignal(
+  public $hero = toSignal(
     toObservable(this.id).pipe(
-      switchMap(id => id ? this._heroesService.getHeroById(id) : of(null))
-    ),
-    { initialValue: null as Hero | null }
+      filter(Boolean),
+      switchMap(id => this._heroesService.getHeroById(id))
+    )
   );
-
+  
 }

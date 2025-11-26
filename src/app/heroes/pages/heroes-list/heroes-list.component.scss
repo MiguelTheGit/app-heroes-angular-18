@@ -60,4 +60,19 @@
         color: $color-secondary;
         font-style: italic;
     }
+
+    &__delete-btn {
+        margin-left: $spacing-sm;
+        padding: $spacing-xs $spacing-sm;
+        background-color: $color-error;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($color-error, 10%);
+        }
+    }
+
 }
