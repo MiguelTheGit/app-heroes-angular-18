@@ -1,0 +1,37 @@
+@use 'variables' as *;
+
+.hero-details {
+    &__title {
+        font-size: 1.8rem;
+        margin-bottom: $spacing-md;
+        color: $color-text;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+    }
+
+    &__name {
+        font-size: $font-size-subtitle;
+        font-weight: bold;
+    }
+
+    &__img {
+        max-width: 220px;
+        margin-top: $spacing-md;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    &__error {
+        color: $color-error;
+        font-weight: 500;
+    }
+
+    &__loading {
+        color: $color-secondary;
+        font-style: italic;
+    }
+}

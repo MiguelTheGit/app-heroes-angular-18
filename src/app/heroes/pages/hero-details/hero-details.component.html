@@ -1,24 +1,22 @@
-<h1>Hero Detail: {{ id() }}</h1>
+<h1 class="hero-details__title">Hero Detail: {{ id() }}</h1>
 
 @defer (when hero()) {
-
   @if (hero(); as hero) {
-    <div>
-      <h3>{{ hero.superhero }}</h3>
+    <div class="hero-details__content">
+      <h3 class="hero-details__name">{{ hero.superhero }}</h3>
       <p><strong>Publisher:</strong> {{ hero.publisher }}</p>
       <p><strong>Alter Ego:</strong> {{ hero.alter_ego }}</p>
       <p><strong>First Appearance:</strong> {{ hero.first_appearance }}</p>
       @if (hero.img) {
-        <img [src]="'assets/heroes/' + hero.img + '.jpg'" alt="{{ hero.superhero }}" />
+        <img [src]="'assets/heroes/' + hero.img + '.jpg'" alt="{{ hero.superhero }}" class="hero-details__img" />
       }
       @if (hero.alt_img) {
-        <img [src]="'assets/heroes/' + hero.alt_img + '.jpg'" alt="{{ hero.superhero }}" />
+        <img [src]="'assets/heroes/' + hero.alt_img + '.jpg'" alt="{{ hero.superhero }}" class="hero-details__img" />
       }
     </div>
   } @else {
-      <p>Hero could not be loaded</p>
+    <p class="hero-details__error">Hero could not be loaded</p>
   }
-
 } @placeholder {
-  <p>Loading hero details...</p>
+  <p class="hero-details__loading">Loading hero details...</p>
 }

@@ -1,0 +1,63 @@
+@use 'variables' as *;
+
+.heroes-list {
+    &__title {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-title;
+        color: $color-text;
+    }
+
+    &__new-btn {
+        display: inline-block;
+        margin-bottom: $spacing-md;
+        padding: $spacing-sm $spacing-md;
+        background-color: $color-primary;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 500;
+
+        &:hover {
+            background-color: $color-primary-dark;
+        }
+    }
+
+    &__items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $spacing-sm 0;
+        border-bottom: 1px solid $color-border;
+    }
+
+    &__link {
+        color: $color-primary;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__edit-link {
+        color: $color-secondary;
+        font-size: 0.9rem;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__empty {
+        color: $color-secondary;
+        font-style: italic;
+    }
+}

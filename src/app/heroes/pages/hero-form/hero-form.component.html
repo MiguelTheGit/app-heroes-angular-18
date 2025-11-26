@@ -1,37 +1,39 @@
-<h2>Crear nuevo héroe</h2>
+<h2 class="hero-form__title">@if (id()) { Edit hero } @else { Create new hero }</h2>
 
-<form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="heroForm" (ngSubmit)="onSubmit()" class="hero-form__form">
+  
+    <div class="hero-form__group">
+    <label>Superhero:</label>
+    <input type="text" formControlName="superhero" class="hero-form__input" />
+  </div>
 
-    <div>
-        <label>Superhero:</label>
-        <input type="text" formControlName="superhero" />
-    </div>
+  <div class="hero-form__group">
+    <label>Publisher:</label>
+    <input type="text" formControlName="publisher" class="hero-form__input" />
+  </div>
 
-    <div>
-        <label>Publisher:</label>
-        <input type="text" formControlName="publisher" />
-    </div>
+  <div class="hero-form__group">
+    <label>Alter Ego:</label>
+    <input type="text" formControlName="alter_ego" class="hero-form__input" />
+  </div>
 
-    <div>
-        <label>Alter Ego:</label>
-        <input type="text" formControlName="alter_ego" />
-    </div>
+  <div class="hero-form__group">
+    <label>First Appearance:</label>
+    <input type="text" formControlName="first_appearance" class="hero-form__input" />
+  </div>
 
-    <div>
-        <label>First Appearance:</label>
-        <input type="text" formControlName="first_appearance" />
-    </div>
+  <div class="hero-form__group">
+    <label>Image (without extension):</label>
+    <input type="text" formControlName="img" class="hero-form__input" />
+  </div>
 
-    <div>
-        <label>Image (name without extension, e.g. "dc-batman"):</label>
-        <input type="text" formControlName="img" />
-    </div>
+  <div class="hero-form__group">
+    <label>Alternative Image:</label>
+    <input type="text" formControlName="alt_img" class="hero-form__input" />
+  </div>
 
-    <div>
-        <label>Alternative Image (optional):</label>
-        <input type="text" formControlName="alt_img" />
-    </div>
-
-    <button type="submit" [disabled]="heroForm.invalid">Save</button>
+  <button type="submit" [disabled]="heroForm.invalid" class="hero-form__btn">
+    @if (id()) { Save changes } @else { Create hero }
+  </button>
 
 </form>
