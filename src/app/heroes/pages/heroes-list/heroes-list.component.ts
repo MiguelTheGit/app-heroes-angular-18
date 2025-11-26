@@ -21,6 +21,6 @@ export class HeroesListComponent {
   /**
    * Signal with the list of heroes
    */
-  public heroes = toSignal(this._heroesService.getHeroes(), { initialValue: [] as Hero[] });
+  public $heroes = toSignal(this._heroesService.getHeroes(), { initialValue: [] as Hero[] });
 
 }

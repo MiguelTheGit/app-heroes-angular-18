@@ -9,25 +9,13 @@ import { Hero } from '../models/interfaces/hero.interface';
 })
 export class HeroesService {
   
-  /**
-   * Base URL for the API
-   * @private
-   * @memberof HeroesService
-   */
+  /** Base URL for the API */
   private readonly _baseUrl = CORE_CONFIG.apiUrl;
   
-  /**
-   * Resource path for heroes
-   * @private
-   * @memberof HeroesService
-   */
+  /** Resource path for heroes */
   private readonly _resource = 'heroes';
 
-  /**
-   * HttpClient instance
-   * @private
-   * @memberof HeroesService
-   */
+  /** HttpClient instance */
   private _http = inject(HttpClient);
 
 
@@ -57,5 +45,14 @@ export class HeroesService {
     return this._http.post<Hero>(`${this._baseUrl}/${this._resource}`, hero);
   }
 
+  /**
+   * Updates an existing hero (full update).
+   * 
+   * @param {Hero} hero - The full hero payload (must include `id`).
+   * @returns {Observable<Hero>} An observable with the updated hero.
+   */
+  public updateHero(hero: Hero): Observable<Hero> {
+    return this._http.put<Hero>(`${this._baseUrl}/${this._resource}/${hero.id}`, hero);
+  }
 
 }

@@ -1,15 +1,16 @@
-<h2>Lista de Héroes</h2>
+<h2>List of heroes</h2>
 
-<a routerLink="/heroes/new"> + Nuevo héroe</a>
+<a routerLink="/heroes/new"> + New Hero</a>
 
 <ul>
-  @for (hero of heroes(); track hero.id) {
+  @for (hero of $heroes(); track hero.id) {
     <li>
-      <a [routerLink]="['/heroes/detail', hero.id]">
-        {{ hero.superhero }}
-      </a>
+      <a [routerLink]="['/heroes/detail', hero.id]"> {{ hero.superhero }} </a>
+      <a [routerLink]="['/heroes/edit', hero.id]" style="margin-left: 1rem;"> Edit </a>
     </li>
   } @empty {
-    <li>No hay héroes disponibles.</li>
+    <li>No heroes available.</li>
   }
 </ul>
+
+

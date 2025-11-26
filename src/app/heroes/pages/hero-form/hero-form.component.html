@@ -1,37 +1,39 @@
-<h2>Crear nuevo héroe</h2>
+<h2> @if (id()) { Edit hero } @else { Create new hero } </h2>
 
 <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
 
-    <div>
-        <label>Superhero:</label>
-        <input type="text" formControlName="superhero" />
-    </div>
+  <div>
+    <label>Superhero:</label>
+    <input type="text" formControlName="superhero" />
+  </div>
 
-    <div>
-        <label>Publisher:</label>
-        <input type="text" formControlName="publisher" />
-    </div>
+  <div>
+    <label>Publisher:</label>
+    <input type="text" formControlName="publisher" />
+  </div>
 
-    <div>
-        <label>Alter Ego:</label>
-        <input type="text" formControlName="alter_ego" />
-    </div>
+  <div>
+    <label>Alter Ego:</label>
+    <input type="text" formControlName="alter_ego" />
+  </div>
 
-    <div>
-        <label>First Appearance:</label>
-        <input type="text" formControlName="first_appearance" />
-    </div>
+  <div>
+    <label>First Appearance:</label>
+    <input type="text" formControlName="first_appearance" />
+  </div>
 
-    <div>
-        <label>Image (name without extension, e.g. "dc-batman"):</label>
-        <input type="text" formControlName="img" />
-    </div>
+  <div>
+    <label>Image (without extension):</label>
+    <input type="text" formControlName="img" />
+  </div>
 
-    <div>
-        <label>Alternative Image (optional):</label>
-        <input type="text" formControlName="alt_img" />
-    </div>
+  <div>
+    <label>Alternative Image:</label>
+    <input type="text" formControlName="alt_img" />
+  </div>
 
-    <button type="submit" [disabled]="heroForm.invalid">Save</button>
+  <button type="submit" [disabled]="heroForm.invalid">
+    @if (id()) { Save changes } @else { Create hero }
+  </button>
 
 </form>
