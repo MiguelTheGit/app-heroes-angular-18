@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { startWith, Subject, switchMap } from 'rxjs';
+import { Hero } from '../../models/interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
@@ -11,28 +10,19 @@ import { HeroesService } from '../../services/heroes.service';
   templateUrl: './heroes-list.component.html',
   styleUrl: './heroes-list.component.scss'
 })
-export class HeroesListComponent {
+export class HeroesListComponent implements OnInit {
   
-  /**
-   * Access to the HeroesService
-   */
+  /** Access to the HeroesService */
   private _heroesService = inject(HeroesService);
 
-  /**
-   * Subject to trigger refresh of heroes list
-   */
-  private _refresh$ = new Subject<void>();
 
-  /**
-   * Signal with the list of heroes
-   */
-  public $heroes = toSignal(
-    this._refresh$.pipe(
-      startWith(void 0),
-      switchMap(() => this._heroesService.getHeroes())
-    ),
-    { initialValue: [] }
-  );
+  /** Signal with the list of heroes */
+  public $heroes = signal<Hero[]>([]);
+
+
+  ngOnInit(): void {
+    this._loadHeroes();
+  }
 
 
   /**
@@ -43,12 +33,25 @@ export class HeroesListComponent {
    * @memberof HeroesListComponent
    */
   public onDelete(id: string): void {
-    if (!confirm('Are you sure you want to delete this hero?')) return;
+    if (!confirm('¿Seguro que quieres eliminar este héroe?')) return;
 
     this._heroesService.deleteHero(id).subscribe({
-      next: () => this._refresh$.next()
+      next: () => this._loadHeroes()
     });
-    
   }
+
+
+  /**
+   * Delete hero and update list
+   *
+   * @private
+   * @memberof HeroesListComponent
+   */
+  private _loadHeroes(): void {
+    this._heroesService.getHeroes().subscribe({
+      next: (heroes) => this.$heroes.set(heroes)
+    });
+  }
+
 
 }
