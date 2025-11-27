@@ -5,8 +5,13 @@
 <ul class="heroes-list__items">
   @for (hero of $heroes(); track hero.id) {
     <li class="heroes-list__item">
+      
       <a [routerLink]="['/heroes/detail', hero.id]" class="heroes-list__link"> {{ hero.superhero }} </a>
+      
       <a [routerLink]="['/heroes/edit', hero.id]" class="heroes-list__edit-link"> Edit </a>
+      
+      <button (click)="onDelete(hero.id)" class="heroes-list__delete-btn">Delete</button>
+    
     </li>
   } @empty {
     <li class="heroes-list__empty">No heroes available.</li>

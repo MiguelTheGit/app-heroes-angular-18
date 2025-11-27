@@ -2,7 +2,7 @@ import { Component, effect, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of, switchMap } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 import { Hero } from '../../models/interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -32,11 +32,10 @@ export class HeroFormComponent {
   /** Signal for hero data (null if creating) */
   public $hero = toSignal(
     toObservable(this.id).pipe(
-      switchMap($id => $id ? this._heroesService.getHeroById($id) : of(null))
-    ),
-    { initialValue: null as Hero | null }
+      filter(Boolean),
+      switchMap(id => this._heroesService.getHeroById(id))
+    )
   );
-
 
 
   /** Reactive form to create a hero */

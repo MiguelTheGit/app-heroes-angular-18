@@ -55,4 +55,14 @@ export class HeroesService {
     return this._http.put<Hero>(`${this._baseUrl}/${this._resource}/${hero.id}`, hero);
   }
 
+  /**
+   * Deletes a hero by its ID.
+   * @param {string} id - The unique identifier of the hero.
+   * @returns {Observable<void>} An observable that completes when deletion is done.
+   */
+  public deleteHero(id: string): Observable<void> {
+    return this._http.delete<void>(`${this._baseUrl}/${this._resource}/${id}`);
+  }
+
+
 }
