@@ -64,5 +64,4 @@ export class HeroesService {
     return this._http.delete<void>(`${this._baseUrl}/${this._resource}/${id}`);
   }
 
-
 }
