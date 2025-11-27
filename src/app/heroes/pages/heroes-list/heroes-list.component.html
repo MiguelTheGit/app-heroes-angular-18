@@ -1,9 +1,22 @@
 <h2 class="heroes-list__title">List of heroes</h2>
 
-<a routerLink="/heroes/new" class="heroes-list__new-btn">+ New Hero</a>
+<div>
+  <input
+    type="text"
+    placeholder="Search hero..."
+    class="heroes-list__search"
+    [value]="$searchTerm()"
+    (input)="$searchTerm.set($any($event.target).value)"
+  />
+</div>
+
+
+<div>
+  <a routerLink="/heroes/new" class="heroes-list__new-btn">+ New Hero</a>
+</div>
 
 <ul class="heroes-list__items">
-  @for (hero of $heroes(); track hero.id) {
+  @for (hero of $filteredHeroes(); track hero.id) {
     <li class="heroes-list__item">
       
       <a [routerLink]="['/heroes/detail', hero.id]" class="heroes-list__link"> {{ hero.superhero }} </a>

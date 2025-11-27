@@ -7,6 +7,25 @@
         color: $color-text;
     }
 
+    &__search-wrapper {
+        margin-bottom: $spacing-md;
+    }
+
+    &__search {
+        width: 100%;
+        padding: $spacing-sm;
+        border: 1px solid $color-border;
+        border-radius: 4px;
+        font-size: $font-size-base;
+        color: $color-text;
+
+        &:focus {
+            outline: none;
+            border-color: $color-primary;
+            box-shadow: 0 0 4px rgba($color-primary, 0.4);
+        }
+    }
+
     &__new-btn {
         display: inline-block;
         margin-bottom: $spacing-md;
@@ -74,5 +93,4 @@
             background-color: darken($color-error, 10%);
         }
     }
-
 }

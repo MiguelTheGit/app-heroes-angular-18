@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Hero } from '../../models/interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
@@ -18,6 +18,18 @@ export class HeroesListComponent implements OnInit {
 
   /** Signal with the list of heroes */
   public $heroes = signal<Hero[]>([]);
+  
+  /** Search Term */
+  public $searchTerm = signal<string>('');
+  
+  /** Computed List Filtered */
+  public $filteredHeroes = computed(() => {
+    const term = this.$searchTerm().toLowerCase();
+    return this.$heroes().filter(hero =>
+      hero.superhero.toLowerCase().includes(term) ||
+      hero.publisher.toLowerCase().includes(term)
+    );
+  });
 
 
   ngOnInit(): void {
