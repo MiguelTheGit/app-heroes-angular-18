@@ -3,6 +3,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
+import { errorInterceptor } from './heroes/interceptors/error.interceptor';
 import { loadingInterceptor } from './heroes/interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -13,7 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     
     provideHttpClient(withInterceptors([
-      loadingInterceptor
+      loadingInterceptor,
+      errorInterceptor,
     ])),
     
   ]

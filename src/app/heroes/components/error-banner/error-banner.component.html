@@ -1,0 +1,6 @@
+@if (errorService.errorMessage()) {
+    <div class="error-banner">
+    <p>{{ errorService.errorMessage() }}</p>
+    <button (click)="errorService.clearError()">Close</button>
+    </div>
+}
