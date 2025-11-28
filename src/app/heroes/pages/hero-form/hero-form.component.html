@@ -1,39 +1,87 @@
 <h2 class="hero-form__title">@if (id()) { Edit hero } @else { Create new hero }</h2>
 
 <form [formGroup]="heroForm" (ngSubmit)="onSubmit()" class="hero-form__form">
-  
-    <div class="hero-form__group">
+
+  <!-- Superhero -->
+  <div class="hero-form__group">
+
     <label>Superhero:</label>
     <input type="text" formControlName="superhero" class="hero-form__input" />
+    
+    @if (heroForm.get('superhero')?.invalid && heroForm.get('superhero')?.touched) {
+      <small class="hero-form__error">
+        @if (heroForm.get('superhero')?.errors?.['required']) { Mandatory field }
+        @if (heroForm.get('superhero')?.errors?.['minlength']) { Minimum of 3 characters }
+      </small>
+    }
+
   </div>
 
+  <!-- Publisher (select) -->
   <div class="hero-form__group">
     <label>Publisher:</label>
-    <input type="text" formControlName="publisher" class="hero-form__input" />
+    
+    <select formControlName="publisher" class="hero-form__input">
+      <option value="" disabled>Select Publisher</option>
+      @for (p of allowed_publishers; track p) {
+        <option [value]="p">{{ p }}</option>
+      }
+    </select>
+
+    @if (heroForm.get('publisher')?.invalid && heroForm.get('publisher')?.touched) {
+      <small class="hero-form__error">
+        @if (heroForm.get('publisher')?.errors?.['required']) { Mandatory field }
+        @if (heroForm.get('publisher')?.errors?.['allowedValues']) { Value not allowed }
+      </small>
+    }
+
   </div>
 
+  <!-- Alter Ego -->
   <div class="hero-form__group">
     <label>Alter Ego:</label>
     <input type="text" formControlName="alter_ego" class="hero-form__input" />
+    @if (heroForm.get('alter_ego')?.invalid && heroForm.get('alter_ego')?.touched) {
+      <small class="hero-form__error"> Mandatory field </small>
+    }
   </div>
 
+  <!-- First Appearance -->
   <div class="hero-form__group">
-    <label>First Appearance:</label>
+    <label>First Appearance</label>
     <input type="text" formControlName="first_appearance" class="hero-form__input" />
+    @if (heroForm.get('first_appearance')?.invalid && heroForm.get('first_appearance')?.touched) {
+      <small class="hero-form__error">
+        @if (heroForm.get('first_appearance')?.errors?.['required']) { Mandatory field }
+      </small>
+    }
   </div>
 
+  <!-- Image (optional) -->
   <div class="hero-form__group">
     <label>Image (without extension):</label>
     <input type="text" formControlName="img" class="hero-form__input" />
+    @if (heroForm.get('img')?.invalid && heroForm.get('img')?.touched) {
+      <small class="hero-form__error">Letters, numbers, and hyphens only (optional)</small>
+    }
   </div>
-
+  
+  <!-- Alternative Image (optional, dependent on Image) -->
   <div class="hero-form__group">
     <label>Alternative Image:</label>
     <input type="text" formControlName="alt_img" class="hero-form__input" />
+    @if (heroForm.get('alt_img')?.invalid && heroForm.get('alt_img')?.touched) {
+      <small class="hero-form__error">Letters, numbers, and hyphens only (optional)</small>
+    }
+    <!-- Error cross-field -->
+    @if (heroForm.hasError('altImgRequiresImg') && heroForm.get('alt_img')?.touched) {
+      <small class="hero-form__error">To use an alternative image, first specify the main image.</small>
+    }
   </div>
+
 
   <button type="submit" [disabled]="heroForm.invalid" class="hero-form__btn">
     @if (id()) { Save changes } @else { Create hero }
   </button>
-
 </form>
+

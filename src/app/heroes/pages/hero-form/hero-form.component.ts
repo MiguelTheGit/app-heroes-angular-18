@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs';
 import { Hero } from '../../models/interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
+import { allowedValuesValidator, altImgRequiresImgValidator, optionalPatternValidator } from './hero-form.validators';
 
 @Component({
   selector: 'app-hero-form',
@@ -38,22 +39,24 @@ export class HeroFormComponent {
   );
 
 
-  /** Reactive form to create a hero */
-  public heroForm = this._fb.group({
-    
-    superhero: ['', [Validators.required, Validators.minLength(1)]],
-    
-    publisher: ['', Validators.required],
-    
-    alter_ego: [''],
-    
-    first_appearance: [''],
-   
-    img: [''],
-    
-    alt_img: ['']
+  /** List of allowed publishers */
+  public readonly allowed_publishers = ['DC Comics', 'Marvel Comics'];
 
-  });
+
+  /** Reactive form to create a hero */
+  public heroForm = this._fb.group(
+    {
+      superhero: ['', [Validators.required, Validators.minLength(3)]],
+      publisher: ['', [Validators.required, allowedValuesValidator(this.allowed_publishers)]],
+      alter_ego: ['', [Validators.required]],
+      first_appearance: ['', [Validators.required]],
+      img: ['', [optionalPatternValidator(/^[a-zA-Z0-9-]+$/)]],
+      alt_img: ['', [optionalPatternValidator(/^[a-zA-Z0-9-]+$/)]]
+    },
+    {
+      validators: [altImgRequiresImgValidator()]
+    }
+  );
 
 
   constructor() {
@@ -94,7 +97,6 @@ export class HeroFormComponent {
     }
 
   }
-
 
   /**
    * Creates a Hero object from forms given an id.

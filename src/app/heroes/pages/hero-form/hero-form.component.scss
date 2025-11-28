@@ -11,7 +11,7 @@
         display: flex;
         flex-direction: column;
         gap: $spacing-md;
-        max-width: 400px;
+        max-width: 800px;
     }
 
     &__input {
@@ -19,6 +19,16 @@
         border: 1px solid $color-border;
         border-radius: 4px;
         font-size: $font-size-base;
+
+        &:focus {
+            outline: none;
+            border-color: $color-primary;
+            box-shadow: 0 0 4px rgba($color-primary, 0.3);
+        }
+
+        &.ng-invalid.ng-touched {
+            border-color: $color-error;
+        }
     }
 
     &__btn {
@@ -38,5 +48,16 @@
             background-color: $color-disabled;
             cursor: not-allowed;
         }
+    }
+
+    &__error {
+        color: $color-error;
+        font-size: 0.85rem;
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
     }
 }
