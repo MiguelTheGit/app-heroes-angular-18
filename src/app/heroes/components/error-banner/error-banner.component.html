@@ -1,6 +1,6 @@
-@if (errorService.errorMessage()) {
+@if ($errorMessage(); as errorMessage) {
     <div class="error-banner">
-    <p>{{ errorService.errorMessage() }}</p>
-    <button (click)="errorService.clearError()">Close</button>
+    <p>{{ errorMessage }}</p>
+    <button (click)="clearError()">Close</button>
     </div>
 }

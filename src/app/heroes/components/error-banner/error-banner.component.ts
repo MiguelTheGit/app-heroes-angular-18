@@ -12,5 +12,18 @@ export class ErrorBannerComponent {
 
   /** Error Service */
   public errorService = inject(ErrorService);
+
+  /** Signal for the error message */
+  public readonly $errorMessage = this.errorService.errorMessage;
   
+  /**
+   *  Clears the error message
+   *
+   * @memberof ErrorBannerComponent
+   */
+  public clearError(){
+    this.errorService.clearError();
+  }
+
+
 }
